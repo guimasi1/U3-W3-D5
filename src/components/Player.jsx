@@ -5,6 +5,7 @@ import next from "../assets/playerbuttons/next.png";
 import repeat from "../assets/playerbuttons/repeat.png";
 import prev from "../assets/playerbuttons/prev.png";
 import { useSelector } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
 
 const Player = () => {
   const songToPlay = useSelector((state) => {
@@ -15,22 +16,8 @@ const Player = () => {
     <div className="container-fluid fixed-bottom bg-container pt-1">
       <div className="row h-100">
         <div className="col-lg-10 offset-lg-2">
-          <div className="row h-100 flex-column justify-content-center align-items-center">
-            {songToPlay && (
-              <div className="d-flex justify-content-center gap-3">
-                <div className="text-white">
-                  <p>{songToPlay.artist.name}</p>
-                  <img
-                    className="rounded-pill"
-                    src={songToPlay.album.cover_small}
-                    style={{ width: "40px" }}
-                    alt=""
-                  />
-                </div>
-                <audio src={songToPlay.preview} autoPlay controls></audio>
-              </div>
-            )}
-            {!songToPlay && (
+          {!songToPlay && (
+            <div className="row h-100 flex-column justify-content-center align-items-center">
               <div className="col-6 col-md-4 playerControls">
                 <div className="d-flex">
                   <a>
@@ -53,8 +40,31 @@ const Player = () => {
                   <div role="progressbar"></div>
                 </div>
               </div>
-            )}
-          </div>
+            </div>
+          )}
+          {songToPlay && (
+            <Container>
+              <Row>
+                <Col xs={2}>
+                  <div className="text-white d-flex gap-3 ms-3 align-items-center">
+                    <p>{songToPlay.artist.name}</p>
+                    <p>{songToPlay.title}</p>
+                    <img
+                      className="rounded-pill"
+                      src={songToPlay.album.cover_small}
+                      style={{ width: "40px" }}
+                      alt=""
+                    />
+                  </div>
+                </Col>
+                <Col className="offset-2">
+                  <div className="d-flex gap-3">
+                    <audio src={songToPlay.preview} autoPlay controls></audio>
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          )}
         </div>
       </div>
     </div>
