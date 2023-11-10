@@ -45,7 +45,7 @@ const Player = () => {
           {songToPlay && (
             <Container>
               <Row>
-                <Col xs={2}>
+                <Col xs={4}>
                   <div className="text-white d-flex gap-3 ms-3 align-items-center">
                     <p>{songToPlay.artist.name}</p>
                     <p>{songToPlay.title}</p>
